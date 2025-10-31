@@ -6,7 +6,7 @@ export async function GET(
   request: Request,
   context: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = await context.params; // ✅ Await here — params is now a Promise
+  const { slug } = await context.params; // ✅ Await the Promise
 
   await connectDB();
   const product = await Product.findOne({ slug });

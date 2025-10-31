@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Product from "@/models/Product";
 
 export async function GET(
-  request: NextRequest,
+  request: Request,
   context: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = await context.params; // 🔥 Must await the promise here
+  const { slug } = await context.params; // ✅ Await here — params is now a Promise
 
   await connectDB();
   const product = await Product.findOne({ slug });
